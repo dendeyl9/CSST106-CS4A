@@ -114,8 +114,42 @@ Draw a bounding box around the detected face region to isolate it from the rest 
 Use additional features, such as the symmetry and relative positions of detected edges, to verify that the detected region is indeed a face.
 
 
+``` python
 
+import cv2
+import matplotlib.pyplot as plt
 
+image_path = '/content/finalface1.png'
+image = cv2.imread(image_path)
+
+if image is None:
+    raise ValueError(f"Image at path '{image_path}' could not be loaded.")
+
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+
+edges = cv2.Canny(blurred_image, 100, 200)
+edges_colored = cv2.applyColorMap(edges, cv2.COLORMAP_HOT)
+
+plt.figure(figsize=(12, 4))
+
+plt.subplot(1, 3, 1)
+plt.title('Original Image')
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+plt.subplot(1, 3, 2)
+plt.title('Grayscale Image')
+plt.imshow(gray_image, cmap='gray')
+
+plt.subplot(1, 3, 3)
+plt.title('Edge Detection')
+plt.imshow(edges_colored)
+
+plt.tight_layout() 
+plt.show()
+
+![image](https://github.com/user-attachments/assets/9adaad9e-6b5b-420a-92f1-41af2f855a63)
 
 
 
