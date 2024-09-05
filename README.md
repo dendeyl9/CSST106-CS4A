@@ -90,32 +90,6 @@ Benefits of attention mechanisms are such as:
 
   An edge detection algorithm refers to a technique used in image analysis and computer vision to identify the locations of significant edges in an image while filtering out false edges caused by noise. It involves applying a high-pass filter to measure the rate of change at each pixel and then thresholding the filter output to determine the pixels that represent edges. The algorithm can be further enhanced by applying techniques like edge thinning to precisely locate the edges in the image.
 
-**Steps to Implement Edge Detection for Face Detection**
-
-**Grayscale Conversion**
-
-Convert the input color image to grayscale to simplify the processing, as color information is not essential for detecting edges.
-
-**Noise Reduction**
-
-Apply a Gaussian blur to reduce noise and avoid detecting false edges.
-
-**Edge Detection**
-
-Use an edge detection algorithm such as the Canny edge detector to identify the edges in the image. This helps in outlining the face and its features.
-
-**Contour Detection**
-
-Analyze the detected edges to find closed contours, which typically represent objects in the image. The largest and most prominent contours likely correspond to the face.
-
-**Bounding Box Extraction**
-
-Draw a bounding box around the detected face region to isolate it from the rest of the image.
-
-**Face Verification**
-
-Use additional features, such as the symmetry and relative positions of detected edges, to verify that the detected region is indeed a face.
-
 ``` python
 
 import cv2
