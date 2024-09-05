@@ -17,9 +17,9 @@ https://github.com/user-attachments/assets/a327272a-fbda-4bed-9cdb-8076af1e6dd8
 * Image Segmentation
 * Image Classification
 
-  From the perspective of AI, the main way of understanding images comes from deep learning technology built on so-called convolutional neural networks (CNNs). Neural networks are modeled after the biological processes that occur in human brains, particularly the way the visual cortex functions.
+From the perspective of AI, the main way of understanding images comes from deep learning technology built on so-called convolutional neural networks (CNNs). Neural networks are modeled after the biological processes that occur in human brains, particularly the way the visual cortex functions.
 
-  In 2023, the enhanced performance of CNN architectures has increased the effectiveness and accuracy of visual recognition problems, resulting in AI being able to represent shapes and images exactly. As of 2024, AI models can not only detect individual items in a scene and classify them correctly, but they can also interpret more complicated images considering the context and relationships involved in a scene. One explanation of the astonishing speed with which AI has developed in terms of visual understanding is the fact that large-scale, annotated datasets have come into existence.
+In 2023, the enhanced performance of CNN architectures has increased the effectiveness and accuracy of visual recognition problems, resulting in AI being able to represent shapes and images exactly. As of 2024, AI models can not only detect individual items in a scene and classify them correctly, but they can also interpret more complicated images considering the context and relationships involved in a scene. One explanation of the astonishing speed with which AI has developed in terms of visual understanding is the fact that large-scale, annotated datasets have come into existence.
 
 # **Roles that AI plays in image processing**
 
@@ -151,7 +151,8 @@ plt.imshow(edges_colored)
 plt.tight_layout() 
 plt.show()
 
-![image](https://github.com/user-attachments/assets/9adaad9e-6b5b-420a-92f1-41af2f855a63)
+![image](https://github.com/user-attachments/assets/fe45df7b-88f6-4ee6-a111-e21c26ae1517)
+
 
 ```
 # **Research an Emerging Form of Image Processing**
