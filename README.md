@@ -125,10 +125,9 @@ plt.imshow(edges_colored)
 plt.tight_layout() 
 plt.show()
 
+```
 ![image](https://github.com/user-attachments/assets/fe45df7b-88f6-4ee6-a111-e21c26ae1517)
 
-
-```
 # **Research an Emerging Form of Image Processing**
 
 **Fourier Neural Operators (FNO)** are an innovative deep learning technique aimed at solving high-dimensional, complex problems such as those found in scientific computing, including fluid dynamics, weather prediction, and more. This method uses neural networks in conjunction with Fourier transforms to model partial differential equations (PDEs) efficiently. FNOs are emerging as a powerful tool for both scientific applications and broader AI-based image processing tasks.
