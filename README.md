@@ -1,5 +1,5 @@
 
-# CSST106-CS4A
+# 4A-TRINIDAD-MP1
 Perception and Computer Vision - Machine Problem 1 
 
 https://github.com/user-attachments/assets/a327272a-fbda-4bed-9cdb-8076af1e6dd8
