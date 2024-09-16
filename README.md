@@ -141,15 +141,11 @@ plt.show()
 * Engineering and Manufacturing
 * Image Processing
 
+MP 2 
 
+https://colab.research.google.com/drive/1uDhBqFQh1yy12Q0Unx5jRuVMNnAbB_vC?usp=sharing
 
-
-
-
-
-
-
-
-
-
+OUTPUT:
+![image](https://github.com/user-attachments/assets/df26a6e9-4766-4e0c-9525-919dd4d5a5a8)
+![image](https://github.com/user-attachments/assets/4f1e780b-0784-416e-9260-db95d7deb519)
 
