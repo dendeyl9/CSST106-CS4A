@@ -27,7 +27,8 @@ You will submit your code, processed images, and a short report comparing the re
 *   Apply the SURF algorithm to do the same.
 *   Finally, apply ORB to extract keypoints and descriptors.
 
-  import cv2
+ ```python
+import cv2
 import matplotlib.pyplot as plt
 
 # Load two images that depict the same scene or object from different angles
@@ -52,3 +53,66 @@ plt.axis('off')
 
 plt.tight_layout()
 plt.show()
+ ```
+![image](https://github.com/user-attachments/assets/4f51ddb1-1941-461b-8c81-bf73d43d016e)
+
+```python
+sift = cv2.SIFT_create()
+keypoints1_sift, descriptors1_sift = sift.detectAndCompute(image1, None)
+keypoints2_sift, descriptors2_sift = sift.detectAndCompute(image2, None)
+
+surf = cv2.xfeatures2d.SURF_create()
+keypoints1_surf, descriptors1_surf = surf.detectAndCompute(image1, None)
+keypoints2_surf, descriptors2_surf = surf.detectAndCompute(image2, None)
+
+orb = cv2.ORB_create()
+keypoints1_orb, descriptors1_orb = orb.detectAndCompute(image1, None)
+keypoints2_orb, descriptors2_orb = orb.detectAndCompute(image2, None)
+
+image1_sift_keypoints = cv2.drawKeypoints(image1, keypoints1_sift, None, color=(255, 0, 0))
+image2_sift_keypoints = cv2.drawKeypoints(image2, keypoints2_sift, None, color=(255, 0, 0))
+
+image1_surf_keypoints = cv2.drawKeypoints(image1, keypoints1_surf, None, color=(0, 255, 0))
+image2_surf_keypoints = cv2.drawKeypoints(image2, keypoints2_surf, None, color=(0, 255, 0))
+
+image1_orb_keypoints = cv2.drawKeypoints(image1, keypoints1_orb, None, color=(0, 0, 255))
+image2_orb_keypoints = cv2.drawKeypoints(image2, keypoints2_orb, None, color=(0, 0, 255))
+
+plt.figure(figsize=(10, 8))
+
+plt.subplot(3, 2, 1)
+plt.imshow(cv2.cvtColor(image1_sift_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('SIFT Keypoints (Image 1)')
+plt.axis('off')
+
+plt.subplot(3, 2, 2)
+plt.imshow(cv2.cvtColor(image2_sift_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('SIFT Keypoints (Image 2)')
+plt.axis('off')
+
+plt.subplot(3, 2, 3)
+plt.imshow(cv2.cvtColor(image1_surf_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('SURF Keypoints (Image 1)')
+plt.axis('off')
+
+plt.subplot(3, 2, 4)
+plt.imshow(cv2.cvtColor(image2_surf_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('SURF Keypoints (Image 2)')
+plt.axis('off')
+
+plt.subplot(3, 2, 5)
+plt.imshow(cv2.cvtColor(image1_orb_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('ORB Keypoints (Image 1)')
+plt.axis('off')
+
+plt.subplot(3, 2, 6)
+plt.imshow(cv2.cvtColor(image2_orb_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('ORB Keypoints (Image 2)')
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+```
+
+![image](https://github.com/user-attachments/assets/6a38b97f-ab12-4e97-8a54-487330b6b679)
+
