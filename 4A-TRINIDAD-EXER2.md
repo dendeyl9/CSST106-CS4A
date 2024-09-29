@@ -15,6 +15,24 @@ The code first loads the image, converts it to grayscale (because many feature d
 *   Keypoints are important image features.
 *   Descriptors are used to describe and match these keypoints.
 
+```python
+!apt-get update
+!apt-get install -y cmake build-essential pkg-config
+
+!git clone https://github.com/opencv/opencv.git
+!git clone https://github.com/opencv/opencv_contrib.git
+
+!mkdir -p opencv/build
+%cd opencv/build
+!cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX=/usr/local \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+        -D BUILD_EXAMPLES=OFF ..
+!make -j8
+!make install
+```
+
 # **Task 1: SIFT Feature Extraction**
 
 1. Load an image of your choice.
@@ -27,7 +45,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Load the image
-image = cv2.imread('/content/cylaaa.jpeg')
+image = cv2.imread('/content/image 1.jpeg')
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # Initialize SIFT detector
@@ -44,7 +62,8 @@ plt.imshow(cv2.cvtColor(image_with_keypoints, cv2.COLOR_BGR2RGB))
 plt.title('SIFT Keypoints')
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/781c3c1b-1b33-4d0c-aa52-39ca0c0954c6)
+![image](https://github.com/user-attachments/assets/6d6f61ef-8c76-40d3-b468-b44e86f3f9f3)
+
 
 **SURF Feature Extraction**
 
@@ -66,7 +85,28 @@ that SIFT would detect.
 descriptors.
 3. Visualize and display the keypoints.
 
--------------------------------------------------------------------------------
+```python
+# Load the image
+image = cv2.imread('/content/image 1.jpeg')
+
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Initialize SURF detector (You might need OpenCV-contrib for SURF)
+surf = cv2.xfeatures2d.SURF_create()
+
+# Detect keypoints and descriptors
+keypoints, descriptors = surf.detectAndCompute(gray_image, None)
+
+# Draw keypoints on the image
+image_with_keypoints = cv2.drawKeypoints(image, keypoints, None)
+
+# Display the image with keypoints
+plt.imshow(cv2.cvtColor(image_with_keypoints, cv2.COLOR_BGR2RGB))
+plt.title('SURF Keypoints')
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/0f8af41b-ba59-42d8-8296-e1f82549d32b)
+
 
 **ORB Feature Extraction**
 
@@ -90,7 +130,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Load the image
-image = cv2.imread('/content/cylaaa.jpeg')
+image = cv2.imread('/content/image 1.jpeg')
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # Initialize ORB detector
@@ -107,7 +147,8 @@ plt.imshow(cv2.cvtColor(image_with_keypoints, cv2.COLOR_BGR2RGB))
 plt.title('ORB Keypoints')
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/88c71f30-d255-47fd-a74c-61119ad64031)
+![image](https://github.com/user-attachments/assets/dfeebfc1-8298-4ddb-9647-c73e87e41416)
+
 
 **Feature Matching using SIFT**
 
@@ -131,8 +172,8 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Load two images
-image1 = cv2.imread('/content/cyla.jpeg', 0)
-image2 = cv2.imread('/content/cylaaa.jpeg', 0)
+image1 = cv2.imread('/content/image 1.jpeg', 0)
+image2 = cv2.imread('/content/image 2.jpeg', 0)
 
 # Initialize SIFT detector
 sift = cv2.SIFT_create()
@@ -158,7 +199,7 @@ plt.imshow(image_matches)
 plt.title('Feature Matching with SIFT')
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/509167bf-d80a-4537-971f-2811d7d48519)
+![image](https://github.com/user-attachments/assets/9cfbc60e-d6b8-4070-9a97-85d5643bf851)
 
 **Real-World Applications (Image Stitching using Homography)**
 
@@ -182,8 +223,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load two images
-image1 = cv2.imread('/content/cyla.jpeg')
-image2 = cv2.imread('/content/cylaaa.jpeg')
+image1 = cv2.imread('/content/image 2.jpeg')
+image2 = cv2.imread('/content/image 1.jpeg')
 
 # Convert to grayscale
 gray1 = cv2.cvtColor(image1, cv2.COLOR_BGR2GRAY)
@@ -220,7 +261,8 @@ plt.imshow(cv2.cvtColor(result, cv2.COLOR_BGR2RGB))
 plt.title('Image Alignment using Homography')
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/fb8c3b01-4e02-4648-8ad0-b49f0ceb3f30)
+![image](https://github.com/user-attachments/assets/c606e633-99a2-4acf-8f98-3485706360fa)
+
 
 **Combining SIFT and ORB**
 
@@ -240,93 +282,49 @@ In the code, we extract keypoints from two images using both SIFT and ORB, and t
 
 ```python
 import cv2
-import matplotlib.pyplot as plt
 
-# Load two images
-image1 = cv2.imread('/content/cylaaa.jpeg', 0)
-image2 = cv2.imread('/content/cyla.jpeg', 0)
+image1 = cv2.imread('/content/image 1.jpeg', 0)
+image2 = cv2.imread('/content/image 2.jpeg', 0)
 
-# Check if images were loaded correctly
-if image1 is None or image2 is None:
-    print("Error loading images")
-else:
-    # SIFT detector
-    sift = cv2.SIFT_create()
+sift = cv2.SIFT_create()
+keypoints1_sift, descriptors1_sift = sift.detectAndCompute(image1, None)
+keypoints2_sift, descriptors2_sift = sift.detectAndCompute(image2, None)
 
-    keypoints1_sift, descriptors1_sift = sift.detectAndCompute(image1, None)
-    keypoints2_sift, descriptors2_sift = sift.detectAndCompute(image2, None)
-
-    # ORB detector
-    orb = cv2.ORB_create()
-
-    keypoints1_orb, descriptors1_orb = orb.detectAndCompute(image1, None)
-    keypoints2_orb, descriptors2_orb = orb.detectAndCompute(image2, None)
-
-    # Display SIFT keypoints on both images
-    image1_sift = cv2.drawKeypoints(image1, keypoints1_sift, None, (0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    image2_sift = cv2.drawKeypoints(image2, keypoints2_sift, None, (0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
-    # Display ORB keypoints on both images
-    image1_orb = cv2.drawKeypoints(image1, keypoints1_orb, None, (0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    image2_orb = cv2.drawKeypoints(image2, keypoints2_orb, None, (0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-
-    # Show the keypoints for SIFT
-    plt.figure(figsize=(10, 5))
-    plt.subplot(1, 2, 1)
-    plt.imshow(image1_sift, cmap='gray')
-    plt.title('SIFT Keypoints - Image 1')
-    plt.axis('off')
-
-    plt.subplot(1, 2, 2)
-    plt.imshow(image2_sift, cmap='gray')
-    plt.title('SIFT Keypoints - Image 2')
-    plt.axis('off')
-    plt.show()
-
-    # Show the keypoints for ORB
-    plt.figure(figsize=(10, 5))
-    plt.subplot(1, 2, 1)
-    plt.imshow(image1_orb, cmap='gray')
-    plt.title('ORB Keypoints - Image 1')
-    plt.axis('off')
-
-    plt.subplot(1, 2, 2)
-    plt.imshow(image2_orb, cmap='gray')
-    plt.title('ORB Keypoints - Image 2')
-    plt.axis('off')
-    plt.show()
-
-    # Feature matching using BFMatcher for SIFT and ORB
-    bf_sift = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)  # SIFT uses L2 norm
-    matches_sift = bf_sift.match(descriptors1_sift, descriptors2_sift)
-    matches_sift = sorted(matches_sift, key=lambda x: x.distance)
-
-    bf_orb = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)  # ORB uses Hamming norm
-    matches_orb = bf_orb.match(descriptors1_orb, descriptors2_orb)
-    matches_orb = sorted(matches_orb, key=lambda x: x.distance)
-
-    # Draw matches for SIFT
-    sift_matches_image = cv2.drawMatches(image1, keypoints1_sift, image2, keypoints2_sift, matches_sift[:10], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-    
-    # Draw matches for ORB
-    orb_matches_image = cv2.drawMatches(image1, keypoints1_orb, image2, keypoints2_orb, matches_orb[:10], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
-
-    # Show SIFT matches
-    plt.figure(figsize=(12, 6))
-    plt.imshow(sift_matches_image)
-    plt.title('SIFT Matches')
-    plt.axis('off')
-    plt.show()
-
-    # Show ORB matches
-    plt.figure(figsize=(12, 6))
-    plt.imshow(orb_matches_image)
-    plt.title('ORB Matches')
-    plt.axis('off')
-    plt.show()
+orb = cv2.ORB_create()
+keypoints1_orb, descriptors1_orb = orb.detectAndCompute(image1, None)
+keypoints2_orb, descriptors2_orb = orb.detectAndCompute(image2, None)
 ```
-![image](https://github.com/user-attachments/assets/65daee48-5879-459f-b2da-da9b18259e3f)
-![image](https://github.com/user-attachments/assets/d3b92b8d-2541-4249-b307-3f2f64a4fed8)
+```python
+bf_sift = cv2.BFMatcher(cv2.NORM_L2, crossCheck=True)
+matches_sift = bf_sift.match(descriptors1_sift, descriptors2_sift)
+matches_sift = sorted(matches_sift, key=lambda x: x.distance)
+
+bf_orb = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+matches_orb = bf_orb.match(descriptors1_orb, descriptors2_orb)
+matches_orb = sorted(matches_orb, key=lambda x: x.distance)
+
+image_sift_matches = cv2.drawMatches(image1, keypoints1_sift, image2, keypoints2_sift, matches_sift[:30], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+
+image_orb_matches = cv2.drawMatches(image1, keypoints1_orb, image2, keypoints2_orb, matches_orb[:30], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+```
+
+```python
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1, 2, 1)
+plt.imshow(image_sift_matches)
+plt.title('SIFT Matches')
+plt.axis('off')
+
+plt.subplot(1, 2, 2)
+plt.imshow(image_orb_matches)
+plt.title('ORB Matches')
+plt.axis('off')
+
+plt.tight_layout()
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/7bba9382-de8e-49c9-a215-fc6713c41978)
 
 
 # **Overall Understanding:**
