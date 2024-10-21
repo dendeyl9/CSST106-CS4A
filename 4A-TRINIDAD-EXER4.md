@@ -1,5 +1,7 @@
 Trinidad, Cyla Dendeyl M.
+
 BSCS 4A
+
 **CSST 106 (PERCEPTION AND COMPUTER VISION)**
 
 # **Exercise 1: HOG (Histogram of Oriented Gradients) Object Detection**
