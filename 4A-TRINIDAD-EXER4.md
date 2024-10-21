@@ -1,3 +1,9 @@
+Trinidad,Cyla Dendeyl M.
+
+BSCS 4A
+
+**CSST 106 (PERCEPTION AND COMPUTER VISION)**
+
 # **Exercise 1: Harris Corner Detection**
 
 **Task:** Harris Corner Detection is a classic corner detection algorithm. Use the Harris Corner Detection algorithm to detect corners in an image.
